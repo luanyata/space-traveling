@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { format } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 import { useCallback, useState } from 'react';
+import Header from '../components/Header';
 
 interface Post {
   uid?: string;
@@ -36,12 +37,12 @@ export default function Home({ postsPagination }: HomeProps) {
 
   const handleNextPosts = useCallback(async () => {
 
-    try{
+    try {
       const response = await fetch(postsPagination.next_page);
       const { results } = await response.json();
       const newPostsArray = [...posts, ...results]
       setPosts(newPostsArray);
-    }catch{
+    } catch {
       alert('Ocorreu um erro na recuperacao dos novos posts')
     }
 
@@ -49,17 +50,21 @@ export default function Home({ postsPagination }: HomeProps) {
 
   return (
     <>
-      <Head>Home</Head>
+      <Head>Home | Space Trave</Head>
+
+
+      <div className={commonStyles.container}>
+        <Header />
+      </div>
 
       <main className={commonStyles.container}>
+
         <div className={styles.posts}>
-          {postsPagination && postsPagination.results.map(post =>
-            <Link href={`/posts/${post.uid}`} key={post.uid}>
+          { posts.map(post =>
+            <Link href={`/post/${post.uid}`} key={post.uid}>
               <a>
                 <strong>{post.data.title}</strong>
                 <p>{post.data.subtitle}</p>
-
-
                 <div>
                   <FiCalendar size={18} />
                   <span>{format(new Date(post.first_publication_date), 'PP', {
@@ -71,7 +76,6 @@ export default function Home({ postsPagination }: HomeProps) {
                     {post.data.author}
                   </span>
                 </div>
-
               </a>
             </Link>
           )}
