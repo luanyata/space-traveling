@@ -1,1 +1,44 @@
-// TODO
+.posts {
+  strong {
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 2.118rem;
+  }
+
+  a {
+    display: block;
+
+    & + a {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+    }
+  }
+
+  p {
+    color: var(--gray-300);
+    margin: 0.5rem 0 1.563rem;
+    line-height: 1.361rem;
+  }
+
+  div {
+    display: flex;
+
+    span {
+      + svg {
+        margin-left: 1.875rem;
+      }
+    }
+
+    svg {
+      margin-right: 0.656rem;
+    }
+  }
+  button {
+    margin-top: 5rem;
+    background: transparent;
+    border: 0;
+    color: var(--pink);
+    font-weight: 600;
+  }
+
+}
